@@ -1,0 +1,8 @@
+<div class="w-25 mx-auto my-4">
+  <div *ngIf="loading" class="alert alert-warning">Processing...</div>
+  <form (ngSubmit)="onSubmit($event)">
+    <div #cardElement></div>
+    <p>{{ cardErrors }}</p>
+    <button *ngIf="plan">Enroll for ${{ plan.cost }}</button>
+  </form>
+</div>

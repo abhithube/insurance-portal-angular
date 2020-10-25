@@ -1,0 +1,11 @@
+language: minimal
+
+install: skip
+
+script: docker build -t insurance-portal/angular .
+
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: master

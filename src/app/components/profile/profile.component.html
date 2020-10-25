@@ -1,0 +1,78 @@
+<div class="mx-5 my-4">
+  <div *ngIf="params.enrolled" class="alert alert-success">
+    Plan enrollment successful.
+  </div>
+  <div *ngIf="params.cancelled" class="alert alert-success">
+    Plan dropped successfully.
+  </div>
+  <div *ngIf="member">
+    <h1>Profile</h1>
+    <div class="px-4">
+      <div class="pt-4 border-bottom">
+        <h3>Member Details</h3>
+        <div class="m-4">
+          <p>Username: {{ member.username }}</p>
+          <p>Password: ******</p>
+          <p>Email: {{ member.email }}</p>
+        </div>
+      </div>
+      <div class="pt-4 border-bottom">
+        <h3>Plan</h3>
+        <div class="m-4">
+          <div *ngIf="!member.plan">
+            <p>
+              No plan selected. Click <a routerLink="/plans">here</a> to browse
+              plans.
+            </p>
+          </div>
+          <div *ngIf="member.plan" class="w-25">
+            <div class="card mb-4">
+              <div class="card-header h5">{{ member.plan.name }}</div>
+              <div class="card-body">
+                <p *ngIf="member.payments" class="card-text">
+                  Member since:
+                  {{ member.memberSince * 1000 | date: "MMM. dd, yyyy" }}
+                </p>
+                <p class="card-text">
+                  Next Payment:
+                  {{ member.nextPaymentDate * 1000 | date: "MMM. dd, yyyy" }}
+                </p>
+              </div>
+            </div>
+            <button type="button" (click)="onClick()" class="btn btn-primary">
+              Drop Plan
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="py-4">
+        <h3>Billing History</h3>
+        <div *ngIf="member.payments">
+          <div *ngIf="member.payments.length === 0">
+            <p>No billing history.</p>
+          </div>
+          <div *ngIf="member.payments.length > 0">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Plan</th>
+                  <th>Amount</th>
+                  <th>Transaction ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let payment of member.payments.reverse()">
+                  <td>{{ payment.createdAt * 1000 | date: "MM/dd/yyyy" }}</td>
+                  <td>{{ payment.plan }}</td>
+                  <td>{{ payment.amount / 100 | currency }}</td>
+                  <td>{{ payment.id }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

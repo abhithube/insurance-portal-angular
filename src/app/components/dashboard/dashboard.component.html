@@ -1,0 +1,22 @@
+<div class="mx-5 my-4">
+  <h1>Dashboard</h1>
+  <div *ngIf="!notifications || notifications.length === 0" class="my-4">
+    <p>
+      You have no new notifications at this time.
+    </p>
+  </div>
+  <div *ngIf="notifications && notifications.length > 0">
+    <div *ngFor="let notification of notifications.reverse()" class="border w-50 m-4 p-4">
+      <div>
+        <h4>
+          {{ notification.title }}
+          <small class="text-muted col-sm-3">{{ notification.createdAt * 1000 | timeAgo }}</small>
+          <button type="button" class="close" aria-label="Close" (click)="dismissNotification(notification.id)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h4>
+        <p>{{ notification.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
