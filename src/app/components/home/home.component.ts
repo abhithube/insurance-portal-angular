@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  loginUrl: string = "https://auth.at-insurance.com/login?client_id=72hlki212kapavh4ov2h3jobia&response_type=code&scope=openid&redirect_uri=https://at-insurance.com/oauth2/idpresponse"
+  loginUrl: string = "https://auth.at-insurance.com/login?client_id=72hlki212kapavh4ov2h3jobia&response_type=code&scope=openid&redirect_uri=https://app.at-insurance.com/oauth2/idpresponse"
 
   constructor() {}
 
