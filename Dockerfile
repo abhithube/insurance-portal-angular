@@ -4,7 +4,7 @@ COPY package.json .
 RUN npm install
 RUN npm install -g @angular/cli
 COPY . .
-RUN ng build --output-path=dist
+RUN ng build --prod --output-path=dist
 
 FROM nginx:alpine
 

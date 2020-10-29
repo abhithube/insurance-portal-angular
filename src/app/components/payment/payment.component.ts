@@ -12,6 +12,7 @@ import {
 import { PlanService } from 'src/app/services/plan.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Plan } from 'src/app/models/plan';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-payment',
@@ -23,13 +24,13 @@ export class PaymentComponent implements AfterViewInit, OnInit {
   card: any;
   cardErrors: any;
 
-  username: string = "athube";
   plan: Plan;
   enrollmentRequest: EnrollmentRequest;
 
   loading: boolean = false;
 
   constructor(
+    private authService: AuthService,
     private enrollmentService: EnrollmentService,
     private planService: PlanService,
     private router: Router,
@@ -38,9 +39,9 @@ export class PaymentComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params: Params) =>
-      this.planService.getPlan(params.plan).subscribe(
-        (res: Plan) => this.plan = res
-      )
+      this.planService
+        .getPlan(params.plan)
+        .subscribe((res: Plan) => (this.plan = res))
     );
   }
 
@@ -63,9 +64,11 @@ export class PaymentComponent implements AfterViewInit, OnInit {
     if (error) {
       this.cardErrors = error.message;
     } else {
+      const username = await this.authService.getUsername();
+
       this.enrollmentRequest = {
         sourceId: source.id,
-        username: this.username,
+        username,
         plan: this.plan,
       };
 

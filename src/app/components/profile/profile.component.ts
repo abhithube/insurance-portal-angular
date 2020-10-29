@@ -3,6 +3,7 @@ import { MemberService } from 'src/app/services/member.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Member } from 'src/app/models/member';
 import { EnrollmentService } from 'src/app/services/enrollment.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,9 @@ import { EnrollmentService } from 'src/app/services/enrollment.service';
 export class ProfileComponent implements OnInit {
   member: Member;
   params: Params;
-  username: string = "athube";
 
   constructor(
+    private authService: AuthService,
     private memberService: MemberService,
     private enrollmentService: EnrollmentService,
     private router: Router,
@@ -22,10 +23,11 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.memberService
-      .getMember(this.username).subscribe(
-        (res: Member) => this.member = res
-      );
+    this.authService.getUsername().then((username: string) => {
+      this.memberService
+        .getMember(username)
+        .subscribe((member: Member) => (this.member = member));
+    });
 
     this.activatedRoute.queryParams.subscribe(
       (params: Params) => (this.params = params)
@@ -34,9 +36,9 @@ export class ProfileComponent implements OnInit {
 
   onClick(): void {
     this.enrollmentService
-      .cancelSubscription(this.username)
+      .cancelSubscription(this.member.username)
       .subscribe(() => {
-        this.router.navigate(['/profile'], {
+        this.router.navigate(['/dashboard'], {
           queryParams: { cancelled: 'true' },
         });
 

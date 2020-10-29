@@ -5,6 +5,7 @@ import { Plan } from 'src/app/models/plan';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { MemberService } from 'src/app/services/member.service';
 import { Member } from 'src/app/models/member';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-plan-list',
@@ -14,9 +15,9 @@ import { Member } from 'src/app/models/member';
 export class PlanListComponent implements OnInit {
   plans: Plan[];
   params: Params;
-  username: string = "athube";
 
   constructor(
+    private authService: AuthService,
     private planService: PlanService,
     private memberService: MemberService,
     private router: Router,
@@ -24,20 +25,24 @@ export class PlanListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.planService.getPlans().subscribe(
-      (res: Plan[]) => this.plans = res
-      );
+    this.planService.getPlans().subscribe((res: Plan[]) => (this.plans = res));
 
     this.activatedRoute.queryParams.subscribe(
-      (params: Params) => this.params = params
+      (params: Params) => (this.params = params)
     );
   }
 
   selectPlan(plan: Plan): void {
-    this.memberService
-      .getMember(this.username)
-      .subscribe((res: Member) => {
-        if (res.plan) {
+    this.authService.getUsername().then((username: string) => {
+      if (!username) {
+        this.router.navigate(['/plans'], {
+          queryParams: { unauthenticated: true },
+        });
+        return;
+      }
+
+      this.memberService.getMember(username).subscribe((member: Member) => {
+        if (member.plan) {
           this.router.navigate(['/plans'], {
             queryParams: { enrolled: true },
           });
@@ -47,5 +52,6 @@ export class PlanListComponent implements OnInit {
           });
         }
       });
+    });
   }
 }

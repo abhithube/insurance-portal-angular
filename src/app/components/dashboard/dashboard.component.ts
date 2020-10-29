@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Notification } from 'src/app/models/notification';
+import { Member } from 'src/app/models/member';
+import { AuthService } from 'src/app/services/auth.service';
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,13 +9,27 @@ import { Notification } from 'src/app/models/notification';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  notifications: Notification[];
+  member: Member;
 
-  constructor() {}
+  constructor(
+    private authService: AuthService,
+    private memberService: MemberService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.getUsername().then((username: string) => {
+      this.memberService.getMember(username).subscribe((member: Member) => {
+        this.member = member;
+      });
+    });
+  }
 
   dismissNotification(id: string): void {
-    this.notifications = this.notifications.filter(notification => notification.id !== id);
+    let notifications = this.member.notifications.filter(
+      (notification) => notification.id !== id
+    );
+
+    this.member.notifications = notifications;
+    this.memberService.updateMember(this.member).subscribe();
   }
 }

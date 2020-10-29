@@ -7,14 +7,22 @@
       </li>
     </ul>
 
-    <ul class="navbar-nav ml-auto">
+    <ul *ngIf="!isLoggedIn" class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link btn btn-primary" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link btn btn-primary" routerLink="/register">Register</a>
+      </li>
+    </ul>
+    <ul *ngIf="isLoggedIn" class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link btn btn-primary" routerLink="/profile">
           My Profile
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link btn btn-primary" routerLink="/">
+        <a class="nav-link btn btn-primary" (click)="logout()">
           Logout
         </a>
       </li>

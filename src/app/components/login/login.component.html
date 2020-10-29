@@ -1,0 +1,64 @@
+<div class="w-25 mx-auto my-4">
+  <div *ngIf="params.registered" class="alert alert-success">
+    Account created successfully.
+  </div>
+  <div *ngIf="params.invalid" class="alert alert-danger">
+    Invalid credentials.
+  </div>
+  <div *ngIf="params.unauthorized" class="alert alert-danger">
+    You must be logged in to access this page.
+  </div>
+  <div *ngIf="params.logout" class="alert alert-success">
+    Logged out successfully.
+  </div>
+  <h1 class="text-center">Login</h1>
+  <form
+    *ngIf="loginForm"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
+    <div class="form-group">
+      <label>Username</label>
+      <input
+        type="text"
+        [formControlName]="'username'"
+        name="username"
+        class="form-control"
+      />
+      <span
+        *ngIf="
+          !loginForm.get('username').valid && loginForm.get('username').touched
+        "
+        class="text-danger"
+        >Please provide a valid username.</span
+      >
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input
+        type="password"
+        [formControlName]="'password'"
+        name="password"
+        class="form-control"
+      />
+      <span
+        *ngIf="
+          !loginForm.get('password').valid && loginForm.get('password').touched
+        "
+        class="text-danger"
+      >
+        Password must be at least 6 characters long.</span
+      >
+    </div>
+    <div class="mx-auto text-center">
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="btn btn-primary"
+      >
+        Sign In
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Member } from '../models/member';
 
@@ -13,5 +13,9 @@ export class MemberService {
 
   getMember(username: string): Observable<any> {
     return this.httpClient.get<Member>(this.baseUrl + username);
+  }
+
+  updateMember(member: Member): Observable<any> {
+    return this.httpClient.put(this.baseUrl + member.username, member);
   }
 }
