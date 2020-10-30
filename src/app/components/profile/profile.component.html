@@ -1,7 +1,4 @@
 <div class="mx-5 my-4">
-  <div *ngIf="params.enrolled" class="alert alert-success">
-    Plan enrollment successful.
-  </div>
   <div *ngIf="params.cancelled" class="alert alert-success">
     Plan dropped successfully.
   </div>
@@ -62,7 +59,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let payment of member.payments.reverse()">
+                <tr *ngFor="let payment of member.payments">
                   <td>{{ payment.createdAt * 1000 | date: "MM/dd/yyyy" }}</td>
                   <td>{{ payment.plan }}</td>
                   <td>{{ payment.amount / 100 | currency }}</td>

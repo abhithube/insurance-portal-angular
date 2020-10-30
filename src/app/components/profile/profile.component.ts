@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
     this.enrollmentService
       .cancelSubscription(this.member.username)
       .subscribe(() => {
-        this.router.navigate(['/dashboard'], {
+        this.router.navigate(['/profile'], {
           queryParams: { cancelled: 'true' },
         });
 

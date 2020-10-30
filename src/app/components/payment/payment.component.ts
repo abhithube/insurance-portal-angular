@@ -75,7 +75,7 @@ export class PaymentComponent implements AfterViewInit, OnInit {
       this.enrollmentService
         .createSubscription(this.enrollmentRequest)
         .subscribe(() => {
-          this.router.navigate(['/profile'], {
+          this.router.navigate(['/dashboard'], {
             queryParams: { enrolled: 'true' },
           });
 

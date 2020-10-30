@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Member } from 'src/app/models/member';
+import { Notification } from 'src/app/models/notification';
 import { AuthService } from 'src/app/services/auth.service';
 import { MemberService } from 'src/app/services/member.service';
 
@@ -10,10 +12,13 @@ import { MemberService } from 'src/app/services/member.service';
 })
 export class DashboardComponent implements OnInit {
   member: Member;
+  notifications: Notification[];
+  params: Params;
 
   constructor(
     private authService: AuthService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -22,6 +27,10 @@ export class DashboardComponent implements OnInit {
         this.member = member;
       });
     });
+
+    this.activatedRoute.queryParams.subscribe(
+      (params: Params) => (this.params = params)
+    );
   }
 
   dismissNotification(id: string): void {

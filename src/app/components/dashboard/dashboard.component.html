@@ -1,4 +1,7 @@
 <div class="mx-5 my-4">
+  <div *ngIf="params.enrolled" class="alert alert-success">
+    Plan enrollment successful.
+  </div>
   <h1>Dashboard</h1>
   <div *ngIf="member">
     <div *ngIf="member.notifications.length === 0" class="my-4">
@@ -6,7 +9,7 @@
     </div>
     <div *ngIf="member.notifications.length > 0">
       <div
-        *ngFor="let notification of member.notifications.reverse()"
+        *ngFor="let notification of member.notifications"
         class="border w-50 m-4 p-4"
       >
         <div>
