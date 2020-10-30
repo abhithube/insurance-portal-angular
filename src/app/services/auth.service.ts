@@ -15,12 +15,13 @@ export class AuthService {
       .catch(() => {});
   }
 
-  async login(username: string, password: string): Promise<any> {
+  async login(username: string, password: string): Promise<boolean> {
     try {
       await Auth.signIn(username, password);
       this.loggedIn.emit(true);
+      return true;
     } catch (err) {
-      return err;
+      return false;
     }
   }
 

@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
       .then((success: boolean) => {
         if (success) {
           this.router.navigate(['/login'], {
-            queryParams: { registered: 'true', unverified: 'true' },
+            queryParams: { registered: 'true' },
           });
         } else {
           this.router.navigate(['/register'], {

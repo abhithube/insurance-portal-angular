@@ -37,18 +37,12 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const username = this.loginForm.get('username').value;
     const password = this.loginForm.get('password').value;
-    this.authService.login(username, password).then((err) => {
-      if (!err) this.router.navigate(['/dashboard']);
+    this.authService.login(username, password).then((success: boolean) => {
+      if (success) this.router.navigate(['/dashboard']);
       else {
-        if (err.code === 'UserNotConfirmedException') {
-          this.router.navigate(['/login'], {
-            queryParams: { unverified: 'true' },
-          });
-        } else {
-          this.router.navigate(['/login'], {
-            queryParams: { invalid: 'true' },
-          });
-        }
+        this.router.navigate(['/login'], {
+          queryParams: { invalid: 'true' },
+        });
       }
     });
   }
