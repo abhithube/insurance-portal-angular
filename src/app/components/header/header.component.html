@@ -1,7 +1,12 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" routerLink="/dashboard" h1>AT Insurance</a>
+    <a class="navbar-brand" routerLink="/" h1>AT Insurance</a>
     <ul class="navbar-nav mr-auto">
+      <li *ngIf="isLoggedIn" class="nav-item active">
+        <a class="nav-link btn btn-primary" routerLink="/dashboard"
+          >Dashboard</a
+        >
+      </li>
       <li class="nav-item active">
         <a class="nav-link btn btn-primary" routerLink="/plans">Plans</a>
       </li>
@@ -22,9 +27,7 @@
         </a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link btn btn-primary" (click)="logout()">
-          Logout
-        </a>
+        <a class="nav-link btn btn-primary" (click)="logout()"> Logout </a>
       </li>
     </ul>
   </nav>

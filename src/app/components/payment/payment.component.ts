@@ -57,13 +57,12 @@ export class PaymentComponent implements AfterViewInit, OnInit {
   async onSubmit(e) {
     e.preventDefault();
 
-    this.loading = true;
-
     const { source, error } = await stripe.createSource(this.card);
 
     if (error) {
       this.cardErrors = error.message;
     } else {
+      this.loading = true;
       const username = await this.authService.getUsername();
 
       this.enrollmentRequest = {

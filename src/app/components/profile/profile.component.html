@@ -1,5 +1,5 @@
 <div class="mx-5 my-4">
-  <div *ngIf="params.cancelled" class="alert alert-success">
+  <div *ngIf="params.cancelled" class="w-25 alert alert-success">
     Plan dropped successfully.
   </div>
   <div *ngIf="member">
@@ -45,10 +45,10 @@
       <div class="py-4">
         <h3>Billing History</h3>
         <div *ngIf="member.payments">
-          <div *ngIf="member.payments.length === 0">
+          <div class="m-4" *ngIf="member.payments.length === 0">
             <p>No billing history.</p>
           </div>
-          <div *ngIf="member.payments.length > 0">
+          <div class="mt-4" *ngIf="member.payments.length > 0">
             <table class="table">
               <thead>
                 <tr>

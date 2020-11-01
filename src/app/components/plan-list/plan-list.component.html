@@ -1,11 +1,13 @@
 <div class="mx-5 mt-4">
+  <div class="w-25">
+    <div *ngIf="params.enrolled" class="alert alert-danger">
+      Already enrolled in a plan.
+    </div>
+    <div *ngIf="params.unauthenticated" class="alert alert-danger">
+      You must be logged in to enroll in a plan.
+    </div>
+  </div>
   <h1>Plans</h1>
-  <div *ngIf="params.enrolled" class="alert alert-danger">
-    Already enrolled in a plan.
-  </div>
-  <div *ngIf="params.unauthenticated" class="alert alert-danger">
-    You must be logged in to enroll in a plan.
-  </div>
   <div *ngFor="let plan of plans" class="border w-25 m-4 p-4">
     <h3>{{ plan.name }}</h3>
     <p>Cost: {{ plan.cost | currency: "USD" }}/mo</p>
