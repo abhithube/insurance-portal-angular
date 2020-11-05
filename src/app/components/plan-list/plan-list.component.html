@@ -10,8 +10,8 @@
   <h1>Plans</h1>
   <div *ngFor="let plan of plans" class="border w-25 m-4 p-4">
     <h3>{{ plan.name }}</h3>
-    <p>Cost: {{ plan.cost | currency: "USD" }}/mo</p>
-    <p>Deductible: {{ plan.deductible | currency: "USD" }}</p>
+    <p>Cost: {{ plan.cost / 100 | currency: "USD" }}/mo</p>
+    <p>Deductible: {{ plan.deductible / 100 | currency: "USD" }}</p>
     <input
       type="submit"
       value="Select Plan"
