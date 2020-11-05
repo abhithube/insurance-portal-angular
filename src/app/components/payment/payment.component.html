@@ -7,19 +7,19 @@
       <p class="mt-4">Cost: {{ plan.cost / 100 | currency: "USD" }}/mo</p>
       <p>Deductible: {{ plan.deductible / 100 | currency: "USD" }}</p>
     </div>
-    <form (ngSubmit)="onSubmit($event)" class="mx-auto" style="width: 300px">
-      <p class="text-danger">{{ cardErrors }}</p>
-      <div #cardElement></div>
-      <div class="text-center">
-        <button class="btn btn-primary mt-4">Enroll</button>
-      </div>
-    </form>
-    <div class="text-muted font-weight-light" style="padding-top: 80px">
-      <p>
-        IMPORTANT: For testing purposes, use the card number
-        <span class="font-weight-bold">4242 4242 4242 4242</span>. Use any date
-        in the future for the expiry date, and any numbers for the CVC.
-      </p>
+  </div>
+  <form (ngSubmit)="onSubmit($event)" class="mx-auto" style="width: 300px">
+    <p class="text-danger">{{ cardErrors }}</p>
+    <div #cardElement></div>
+    <div class="text-center">
+      <button class="btn btn-primary mt-4">Enroll</button>
     </div>
+  </form>
+  <div class="text-muted font-weight-light" style="padding-top: 80px">
+    <p>
+      IMPORTANT: For testing purposes, use the card number
+      <span class="font-weight-bold">4242 4242 4242 4242</span>. Use any date in
+      the future for the expiry date, and any numbers for the CVC.
+    </p>
   </div>
 </div>
