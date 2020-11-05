@@ -7,7 +7,7 @@ import { Plan } from '../models/plan';
   providedIn: 'root',
 })
 export class PlanService {
-  baseUrl: string = 'https://at-insurance.com/api/v1/plans/';
+  baseUrl: string = 'https://at-insurance.com/plan-details-service/plans/';
   constructor(private httpClient: HttpClient) {}
 
   getPlans(): Observable<any> {

@@ -4,8 +4,8 @@
   <div *ngIf="plan">
     <div class="border m-5 p-4">
       <h3 class="text-center my-1">{{ plan.name }}</h3>
-      <p class="mt-4">Cost: {{ plan.cost | currency: "USD" }}/mo</p>
-      <p>Deductible: {{ plan.deductible | currency: "USD" }}</p>
+      <p class="mt-4">Cost: {{ plan.cost / 100 | currency: "USD" }}/mo</p>
+      <p>Deductible: {{ plan.deductible / 100 | currency: "USD" }}</p>
     </div>
     <form (ngSubmit)="onSubmit($event)" class="mx-auto" style="width: 300px">
       <p class="text-danger">{{ cardErrors }}</p>
