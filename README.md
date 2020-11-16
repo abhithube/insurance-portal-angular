@@ -4,16 +4,16 @@ AT Insurance is a health insurance member portal. It’s a web-based application
 ## Website Link
 The application is available at https://app.at-insurance.com.
 
-Note: To save on AWS server costs, the application is only up during the day. A cron job scheduler on AWS auto-scaling terminates all of the EC2 instances every night, and starts them up again in the morning. The "status" badge above indicates if the application is currently up.
+**Note**: To save on AWS server costs, the application is only up during the day. A cron job scheduler on AWS auto-scaling terminates all of the EC2 instances every night, and starts them up again in the morning. The "status" badge above indicates if the application is currently up.
 
 ## Features
-- Account Management: Users can register for accounts and login to view their personal details. The profile page will display their account information, enrollment status, and full billing history.
-- Browsing: The plans page will display the available benefit plans, with information such as cost and deductibles. This page is accessible to all visitors to the site, but only members will be able to enroll in plans.
+- Account Management: Users can register for accounts and login to view their personal details. The profile page displays their account information, enrollment status, and full billing history.
+- Browsing: The plans page displays the available benefit plans, with information such as cost and deductibles. This page is accessible to all visitors to the site, but only members will be able to enroll in plans.
 - Enrollment: Members can enroll in a plan of their choice. Payment (currently) uses the subscription model, so members will be charged immediately and every 30 days thereafter.
 
 ## Technologies
-- **Programming Language**: Java, JavaScript
-- **Framework**: Spring Boot, Angular
+- **Programming Languages**: Java, JavaScript
+- **Frameworks**: Spring Boot, Angular
 - **DBMS**: MongoDB
 - **Messaging**: Kafka
 - **Testing**: JUnit, Mockito
@@ -33,7 +33,7 @@ The services are listed below, each containing a link to its corresponding repo.
 Angular is used for dynamic HTML templating, form validation, routing, and making REST calls. Bootstrap offers some very basic styling to make the application a bit more modern. AWS Amplify, a JS library, connects to a user pool on AWS Cognito and provides functionality to register and authenticate users. An authentication guard is set up to protect certain page routes, redirecting to the login page if the current user is not authenticated.
 
 ## CI/CD Workflow
-The workflow consists of pushing code to a dev branch, upon which Travis CI will run unit tests. If the tests pass, the branch is merged into master. Travis CI will create a Docker image, which consists of building the source code and running tests against that build. Upon success, the image is pushed to the Amazon container registry.
+The build pipeline starts with pushing code to a dev branch, upon which Travis CI will run unit tests. If the tests pass, the branch is merged into master. Travis CI will create a Docker image, which consists of building the source code and running tests against that build. Upon success, the image is pushed to the Amazon container registry.
 
 ## AWS Setup
 Amazon's container-orchestration service, ECS, is responsible for pulling Docker images from the container registry and firing up containers. Two clusters have been created for this project.
