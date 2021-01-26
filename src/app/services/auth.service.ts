@@ -6,7 +6,8 @@ import { Auth } from 'aws-amplify';
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl: string = 'https://at-insurance.com/member-details-service/members/';
+  baseUrl: string =
+    'https://app.at-insurance.com/member-details-service/members/';
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private httpClient: HttpClient) {

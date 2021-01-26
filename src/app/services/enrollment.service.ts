@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EnrollmentService {
-  baseUrl: string = 'https://at-insurance.com/enrollment-service/enrollment/';
+  baseUrl: string =
+    'https://app.at-insurance.com/enrollment-service/enrollment/';
 
   constructor(private httpClient: HttpClient) {}
 

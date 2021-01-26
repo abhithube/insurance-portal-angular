@@ -7,7 +7,8 @@ import { Member } from '../models/member';
   providedIn: 'root',
 })
 export class MemberService {
-  baseUrl: string = 'https://at-insurance.com/member-details-service/members/';
+  baseUrl: string =
+    'https://app.at-insurance.com/member-details-service/members/';
 
   constructor(private httpClient: HttpClient) {}
 
